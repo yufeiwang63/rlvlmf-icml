@@ -1,20 +1,20 @@
 import copy
 
 clip_env_prompts = {
-    "metaworld_sweep-into-v2": "The green cube is in the hole.", # unsolved there is reward issue
-    "metaworld_drawer-open-v2": "The drawer is opened.", # let's try the flipped version.
-    "metaworld_door-open-v2": "The safe door is opened.", # let's try the flipped version.
-    "metaworld_soccer-v2": "The soccer ball is in the goal.", # not solved, there is reward issue
+    "metaworld_sweep-into-v2": "The green cube is in the hole.", 
+    "metaworld_drawer-open-v2": "The drawer is opened.", 
+    "metaworld_door-open-v2": "The safe door is opened.", 
+    "metaworld_soccer-v2": "The soccer ball is in the goal.",
 
     "CartPole-v1": "pole vertically upright on top of the cart.",
 }
 
 # what RL-VLM-F uses
 goal_env_prompts = {
-    "metaworld_sweep-into-v2": "to minimize the distance between the green cube and the hole", # unsolved there is reward issue
-    "metaworld_drawer-open-v2": "to open the drawer", # let's try the flipped version.
-    "metaworld_door-open-v2": "to open the safe door", # let's try the flipped version.
-    "metaworld_soccer-v2": "to move the soccer ball into the goal", # not solved, there is reward issue
+    "metaworld_sweep-into-v2": "to minimize the distance between the green cube and the hole", 
+    "metaworld_drawer-open-v2": "to open the drawer",
+    "metaworld_door-open-v2": "to open the safe door", 
+    "metaworld_soccer-v2": "to move the soccer ball into the goal", 
     "CartPole-v1": "to balance the brown pole on the black cart to be upright",
 }
 
@@ -44,19 +44,6 @@ for env_name, prompt in goal_env_prompts.items():
 ### preference summary prompt
 gemini_summary_env_prompts = {}
 
-### another template we want to try after ICML.
-# gemini_summary_template = """
-# Based on the answer to the questions:
-# 1. What is shown in Image 1?
-# 2. What is shown in Image 2?
-# 3. The goal is {}. Is there any difference between Image 1 and Image 2 in terms of achieving the goal?
-# {}
-
-# 4. Is the goal better achieved in Image 1 or Image 2?
-# 5. Reply a single line of 0 if the goal is better achieved in Image 1, 1 if it is better achieved in Image 2, or -1 if there is no difference or if it is unclear.
-# """
-
-### template 1 icml submission
 gemini_summary_template = """
 Based on the text below to the questions:
 1. What is shown in Image 1?
@@ -75,17 +62,7 @@ for env_name, prompt in goal_env_prompts.items():
 ######################################################################
 ### asking gemini to output a preference with 1 stage analysis ###############
 ######################################################################
-# prompt we want to try after ICML
-# gemini_single_query_prompt_template = """
-# 1. What is shown in Image 1?
-# 2. What is shown in Image 2?
-# 3. The goal is {}. Is there any difference between Image 1 and Image 2 in terms of achieving the goal? 
 
-# 4. Is the goal better achieved in Image 1 or Image 2?
-# 5. Reply a single line of 0 if the goal is better achieved in Image 1, 1 if it is better achieved in Image 2, or -1 if there is no difference or if it is unclear.
-# """
-
-# prompt used during ICML
 gemini_single_query_prompt_template = """
 1. What is shown in Image 1?
 2. What is shown in Image 2?
